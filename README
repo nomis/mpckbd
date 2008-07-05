@@ -1,0 +1,14 @@
+/*
+	2006-10-06 Simon Arlott
+	http://simon.arlott.org/sw/mpckbd/
+*/
+
+Usage
+	mpckbd </dev/input/eventN
+
+Notes
+	Requires Linux 'evdev' module:
+		Device Drivers -> Input Device Support -> Event interface.
+
+	Edit Makefile to set the keys used (see /usr/include/linux/input.h).
+	Defaults to Power/Sleep/WakeUp for Prev/Toggle/Next.
