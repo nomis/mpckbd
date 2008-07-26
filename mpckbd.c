@@ -29,8 +29,8 @@ int main() {
 			case MPCKBD_PREV: run("prev", NULL); children++; break;
 			case MPCKBD_TOGGLE: run("toggle", NULL); children++; break;
 			case MPCKBD_NEXT: run("next", NULL); children++; break;
-			case MPCKBD_VOLUME_DOWN: run("volume", "-1"); children++; break;
-			case MPCKBD_VOLUME_UP: run("volume", "+1"); children++; break;
+			case MPCKBD_VOLUME_DOWN: run("volume", "-2"); children++; break;
+			case MPCKBD_VOLUME_UP: run("volume", "+2"); children++; break;
 			case KEY_PAUSE: chvt(); children++; break;
 		}
 	}
@@ -55,6 +55,6 @@ void chvt(void) {
 	close(1);
 	close(2);
 
-	execlp("sudo", "sudo", "/usr/bin/chvt", "1", NULL);
+	execlp("sudo", "sudo", "/root/break-key", NULL);
 	_exit(1);
 }

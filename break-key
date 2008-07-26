@@ -1,0 +1,10 @@
+#!/bin/bash
+curvt
+case $? in
+	1)
+		pgrep X || /etc/init.d/xdm start
+		;;
+	*)
+		chvt 1
+		;;
+esac
