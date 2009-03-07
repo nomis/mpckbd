@@ -17,3 +17,6 @@ mpckbd: mpckbd.c Makefile
 
 curvt: curvt.c Makefile
 	gcc -o curvt curvt.c -O2 -Wall -Werror
+
+clean:
+	rm -f mpckbd curvt
