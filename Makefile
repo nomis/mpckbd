@@ -15,8 +15,5 @@ mpckbd: mpckbd.c Makefile
 		-DMPCKBD_VOLUME_DOWN=$(VOLUME_DOWN) \
 		$(INCLUDES)
 
-curvt: curvt.c Makefile
-	gcc -o curvt curvt.c -O2 -Wall -Werror
-
 clean:
-	rm -f mpckbd curvt
+	rm -f mpckbd

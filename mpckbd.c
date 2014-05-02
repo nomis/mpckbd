@@ -10,7 +10,6 @@
 #include <sys/wait.h>
 
 void run(const char *cmd1, const char *cmd2);
-void chvt(void);
 
 int main() {
 	struct input_event event;
@@ -31,7 +30,6 @@ int main() {
 			case MPCKBD_NEXT: run("next", NULL); children++; break;
 			case MPCKBD_VOLUME_DOWN: run("volume", "-2"); children++; break;
 			case MPCKBD_VOLUME_UP: run("volume", "+2"); children++; break;
-			case KEY_PAUSE: chvt(); children++; break;
 		}
 	}
 	return 1;
@@ -45,16 +43,5 @@ void run(const char *cmd1, const char *cmd2) {
 	close(2);
 
 	execlp("mpc", "mpc", cmd1, cmd2, NULL);
-	_exit(1);
-}
-
-void chvt(void) {
-	if (fork() != 0) return;
-
-	close(0);
-	close(1);
-	close(2);
-
-	execlp("sudo", "sudo", "/root/break-key", NULL);
 	_exit(1);
 }
