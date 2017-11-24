@@ -28,8 +28,6 @@ int main() {
 			case MPCKBD_PREV: run("prev", NULL); children++; break;
 			case MPCKBD_TOGGLE: run("toggle", NULL); children++; break;
 			case MPCKBD_NEXT: run("next", NULL); children++; break;
-			case MPCKBD_VOLUME_DOWN: run("volume", "-2"); children++; break;
-			case MPCKBD_VOLUME_UP: run("volume", "+2"); children++; break;
 		}
 	}
 	return 1;
