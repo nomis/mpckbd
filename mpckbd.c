@@ -11,6 +11,7 @@
 
 void run(const char *cmd1, const char *cmd2);
 void switch_pc(void);
+void speakers(const char *cmd);
 
 int main() {
 	struct input_event event;
@@ -30,6 +31,8 @@ int main() {
 			case MPCKBD_TOGGLE: run("toggle", NULL); children++; break;
 			case MPCKBD_NEXT: run("next", NULL); children++; break;
 			case KEY_SLEEP: switch_pc(); children++; break;
+			case KEY_MUTE: speakers("off"); children++; break;
+			case KEY_CONFIG: speakers("on"); children++; break;
 		}
 	}
 	return 1;
@@ -54,5 +57,16 @@ void switch_pc(void) {
 	close(2);
 
 	execlp("switch-pc", "switch-pc", NULL);
+	_exit(1);
+}
+
+void speakers(const char *cmd) {
+	if (fork() != 0) return;
+
+	close(0);
+	close(1);
+	close(2);
+
+	execlp("speakers", "speakers", cmd, NULL);
 	_exit(1);
 }
