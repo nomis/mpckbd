@@ -46,7 +46,7 @@ void run(const char *cmd1, const char *cmd2) {
 	close(1);
 	close(2);
 
-	execlp("_mpc", "_mpc", cmd1, cmd2, NULL);
+	execlp("music", "music", cmd1, cmd2, NULL);
 	_exit(1);
 }
 
