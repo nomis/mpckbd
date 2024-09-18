@@ -31,6 +31,7 @@ int main() {
 			case MPCKBD_TOGGLE: run("toggle", NULL); children++; break;
 			case MPCKBD_NEXT: run("next", NULL); children++; break;
 			case KEY_SLEEP: switch_pc(); children++; break;
+			case KEY_WAKEUP: switch_pc(); children++; break;
 			case KEY_MUTE: speakers("off"); children++; break;
 			case KEY_CONFIG: speakers("on"); children++; break;
 		}
@@ -45,7 +46,7 @@ void run(const char *cmd1, const char *cmd2) {
 	close(1);
 	close(2);
 
-	execlp("mpc", "mpc", cmd1, cmd2, NULL);
+	execlp("_mpc", "_mpc", cmd1, cmd2, NULL);
 	_exit(1);
 }
 
