@@ -9,9 +9,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void run(const char *cmd1, const char *cmd2);
-void switch_pc(void);
-void speakers(const char *cmd);
+void run(const char *cmd);
 
 int main() {
 	struct input_event event;
@@ -27,47 +25,21 @@ int main() {
 		if (event.value != EV_KEY) continue;
 
 		switch (event.code) {
-			case MPCKBD_PREV: run("prev", NULL); children++; break;
-			case MPCKBD_TOGGLE: run("toggle", NULL); children++; break;
-			case MPCKBD_NEXT: run("next", NULL); children++; break;
-			case KEY_SLEEP: switch_pc(); children++; break;
-			case KEY_WAKEUP: switch_pc(); children++; break;
-			case KEY_MUTE: speakers("off"); children++; break;
-			case KEY_CONFIG: speakers("on"); children++; break;
+			case MPCKBD_PREV: run("_music-prev"); children++; break;
+			case MPCKBD_TOGGLE: run("_music-toggle"); children++; break;
+			case MPCKBD_NEXT: run("_music-next"); children++; break;
 		}
 	}
 	return 1;
 }
 
-void run(const char *cmd1, const char *cmd2) {
+void run(const char *cmd) {
 	if (fork() != 0) return;
 
 	close(0);
 	close(1);
 	close(2);
 
-	execlp("music", "music", cmd1, cmd2, NULL);
-	_exit(1);
-}
-
-void switch_pc(void) {
-	if (fork() != 0) return;
-
-	close(0);
-	close(1);
-	close(2);
-
-	execlp("switch-pc", "switch-pc", NULL);
-	_exit(1);
-}
-
-void speakers(const char *cmd) {
-	if (fork() != 0) return;
-
-	close(0);
-	close(1);
-	close(2);
-
-	execlp("speakers", "speakers", cmd, NULL);
+	execlp(cmd, cmd, NULL);
 	_exit(1);
 }
